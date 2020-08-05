@@ -27,7 +27,7 @@ TextLCD_I2C lcd(&i2c_lcd, 0x4E, TextLCD_I2C::LCD16x2,TextLCD::HD44780);
 
 const int COUNTLAMP=23; // Колличество ламп 24 в установке (23 т.к. массив начинается с 0)
 
- Lamp LampNumber[COUNTLAMP]={
+Lamp LampNumber[COUNTLAMP]={ //иницианализация ламп
     LED1,//PC_0,
     LED2,//PC_1,
     LED5,//PC_2,
@@ -52,37 +52,6 @@ const int COUNTLAMP=23; // Колличество ламп 24 в установ�
     PC_9,
     PA_8,
 };  // Массив класса ламп (23 т.к. массив начинается с 0)
-
-
-
-
-
-//// Выходы ламп
-
-// DigitalInOut Stat_Lamp_0(PC_0); 
-// DigitalInOut Stat_Lamp_1(PC_1);
-// DigitalInOut Stat_Lamp_2(PC_2);
-// DigitalInOut Stat_Lamp_3(PC_3);
-// DigitalInOut Stat_Lamp_4(PA_2);
-// DigitalInOut Stat_Lamp_5(PA_3);
-// DigitalInOut Stat_Lamp_6(PA_4);
-// DigitalInOut Stat_Lamp_7(PA_5);
-// DigitalInOut Stat_Lamp_8(PA_6);
-// DigitalInOut Stat_Lamp_9(PA_7);
-// DigitalInOut Stat_Lamp_10(PC_4);
-// DigitalInOut Stat_Lamp_11(PC_5);
-// DigitalInOut Stat_Lamp_12(PB_0);
-// DigitalInOut Stat_Lamp_13(PB_1);
-// DigitalInOut Stat_Lamp_14(PB_2);
-// DigitalInOut Stat_Lamp_15(PB_13);
-// DigitalInOut Stat_Lamp_16(PB_14);
-// DigitalInOut Stat_Lamp_17(PB_15);
-// DigitalInOut Stat_Lamp_18(PC_6);
-// DigitalInOut Stat_Lamp_19(PC_7);
-// DigitalInOut Stat_Lamp_20(PC_8);
-// DigitalInOut Stat_Lamp_21(PC_9);
-// DigitalInOut Stat_Lamp_22(PA_8);
-// DigitalInOut Stat_Lamp_23(PA_9);
 
 
 
