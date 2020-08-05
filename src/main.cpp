@@ -12,9 +12,11 @@ int main()
     while(1)
     {
      LampInit();
+     lcd.LightOn;
+     lcd.BlinkOn;
     //led=!led;    
     // LampNumber[0].LampPin=(!LampNumber[0].LampPin);
-
+    
     drebezg_encoder(200);                                 // вызов классов с определенной частотой (200 мс), для избежания дребезга и последовательной обработки кода программы.
     LevelChoice (200);
     Level0 (200);

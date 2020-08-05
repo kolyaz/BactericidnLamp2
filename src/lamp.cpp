@@ -29,11 +29,10 @@ class Lamp
     int LampResusr_Res;                                //Сброс отработанного времени на выставленное лампы  
     int LampResusr_OSt;                                //оставшееся время ресурса лампы 
 
-   //  Lamp()        //Конструктор по умолчанию (без параметров)
-   //  {
 
-   //  }
-    Lamp(PinName pin) : LampPin(pin)  {}
+
+   Lamp(PinName pin) : LampPin(pin)  {} //Конструктор
+
 
    bool LampInit(int OnValue,int Alarm)
     {
