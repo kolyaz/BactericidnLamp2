@@ -19,15 +19,12 @@ class Lamp
     private:
 
     public:
-    Lamp()        //Конструктор по умолчанию (без параметров)
-    {
+   //  Lamp()        //Конструктор по умолчанию (без параметров)
+   //  {
 
-    }
-    Lamp(PinName pin) 
-    {
-       
-    }
-
+   //  }
+    Lamp(PinName pin) : LampPin(pin)  {}
+    
     int getLampResurs_St(void)
     {
        return LampResurs_St;
@@ -72,7 +69,7 @@ class Lamp
 
          
 
-    bool LampRead;                                     //Выход лампы
+    DigitalInOut LampPin;                              //Выход лампы
     int LampResurs_St;                                 //Ресурсное время лампы    
     int LampResurs_Set;                                //Ручное выставление ресурсного вермени лампы    
     int LampResusr_Res;                                //Сброс отработанного времени на выставленное лампы  

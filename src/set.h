@@ -25,33 +25,33 @@ RPG wheelRPG (PB_6,PB_7,PC_13);
 I2C i2c_lcd( I2C_SDA,I2C_SCL); // I2C_SDA, I2C_SCL
 TextLCD_I2C lcd(&i2c_lcd, 0x4E, TextLCD_I2C::LCD16x2,TextLCD::HD44780);
 
-const int COUNTLAMP=50; // Колличество ламп 24 в установке (23 т.к. массив начинается с 0)
+const int COUNTLAMP=23; // Колличество ламп 24 в установке (23 т.к. массив начинается с 0)
 
- Lamp LampNumber[COUNTLAMP];//={
-//     PC_0,
-//     PC_1,
-//     PC_2,
-//     PC_3,
-//     PA_2,
-//     PA_3,
-//     PA_4,
-//     PA_5,
-//     PA_6,
-//     PA_7,
-//     PC_4,
-//     PC_5,
-//     PB_0,
-//     PB_1,
-//     PB_2,
-//     PB_13,
-//     PB_14,
-//     PB_15,
-//     PC_6,
-//     PC_7,
-//     PC_8,
-//     PC_9,
-//     PA_8,
-// };  // Массив класса ламп (23 т.к. массив начинается с 0)
+ Lamp LampNumber[COUNTLAMP]={
+    LED1,//PC_0,
+    PC_1,
+    PC_2,
+    PC_3,
+    PA_2,
+    PA_3,
+    PA_4,
+    PA_5,
+    PA_6,
+    PA_7,
+    PC_4,
+    PC_5,
+    PB_0,
+    PB_1,
+    PB_2,
+    PB_13,
+    PB_14,
+    PB_15,
+    PC_6,
+    PC_7,
+    PC_8,
+    PC_9,
+    PA_8,
+};  // Массив класса ламп (23 т.к. массив начинается с 0)
 
 
 

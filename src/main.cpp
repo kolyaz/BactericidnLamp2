@@ -1,7 +1,7 @@
 #include "set.h"
 
 
-
+DigitalOut led(LED1);
 int main() 
 {   
     t.start();                                          //включение библиотеки системного времени (библиотека Times)////tthffgt
@@ -11,7 +11,8 @@ int main()
     
     while(1)
     {
-        
+    //led=!led;    
+    LampNumber[0].LampPin=(!LampNumber[0].LampPin);
     drebezg_encoder(200);                                 // вызов классов с определенной частотой (200 мс), для избежания дребезга и последовательной обработки кода программы.
     LevelChoice (200);
     Level0 (200);
@@ -21,5 +22,11 @@ int main()
     ResursT (200);    
     On_OffSystem(200);
    // Alarm (200);
+//    if (1)
+//    {   
+//        wait_ms(1000);
+//       // LampNumber[0].LampPin=(!LampNumber[0].LampPin);
+       
+//    }
     }
 }
