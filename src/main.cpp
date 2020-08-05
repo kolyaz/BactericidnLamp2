@@ -11,10 +11,7 @@ int main()
     
     while(1)
     {
-        for (size_t i = 0; i < COUNTLAMP; i++)
-        {
-            LampNumber[i].LampInit(1);
-        }
+     LampInit();
     //led=!led;    
     // LampNumber[0].LampPin=(!LampNumber[0].LampPin);
 
@@ -27,11 +24,6 @@ int main()
     ResursT (200);    
     On_OffSystem(200);
    // Alarm (200);
-//    if (1)
-//    {   
-//        wait_ms(1000);
-//       // LampNumber[0].LampPin=(!LampNumber[0].LampPin);
-       
-//    }
+
     }
 }

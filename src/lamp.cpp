@@ -35,9 +35,9 @@ class Lamp
    //  }
     Lamp(PinName pin) : LampPin(pin)  {}
 
-   bool LampInit(int OnValue)
+   bool LampInit(int OnValue,int Alarm)
     {
-      if (LampResusr_OSt>0)
+      if (LampResusr_OSt>0 && !Alarm)
             {
                LampPin=1;
                return true;
@@ -54,8 +54,6 @@ class Lamp
     {
        return LampResurs_St;
     }
-
-
 
     int setLampResurs_St(int Val_St)
     {
