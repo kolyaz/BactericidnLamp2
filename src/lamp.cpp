@@ -1,0 +1,92 @@
+///////////////////////////////////////////////////////////////////////////////////
+//        Класс лампы
+//        Реализация
+//
+//
+////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+//        Класс лампы
+//        Обьявление
+//
+//
+////////////////////////////////////////////////////////////////////////////////////
+
+#include <mbed.h>
+
+//
+class Lamp
+{
+    private:
+
+    public:
+    Lamp()        //Конструктор по умолчанию (без параметров)
+    {
+
+    }
+    Lamp(PinName pin) 
+    {
+       
+    }
+
+    int getLampResurs_St(void)
+    {
+       return LampResurs_St;
+    }
+
+    int setLampResurs_St(int Val_St)
+    {
+       LampResurs_St=Val_St;
+       return LampResurs_St;
+    }
+
+    int getLampResurs_Set(void)
+    {
+       return LampResurs_Set;
+    }
+    int setLampResurs_Set(int Val_Set)
+    {
+       LampResurs_Set=Val_Set;
+       return LampResurs_Set;
+    }
+
+    int getLampResurs_Res(void)
+    {
+       return LampResusr_Res;
+    }
+    int setLampResurs_Res(int Val_Res)
+    {
+       LampResusr_Res=Val_Res;
+       return LampResusr_Res;
+    }
+
+    int getLampResurs_OSt(void)
+    {
+       return LampResusr_OSt;
+    }
+    int setLampResurs_OSt(int Val_OSt)
+    {
+       LampResusr_OSt=Val_OSt;
+       return LampResusr_OSt;
+    }
+
+   //  Lamp() //Конструктор по умолчанию (без параметров)
+   //  {
+   //      //LampNumber=LampResurs_St=LampResurs_Set=LampResusr_Res=LampResusr_OSt=0;
+   //  };
+        
+    //~Lamp();           //Destructor
+    // {
+    //    //LampNumber=LampResurs_St=LampResurs_Set=LampResusr_Res=LampResusr_OSt=0;
+    // };
+   //  int LampPinOut (PinName pin,int b ) //Иницианализация выхода
+   //  {
+   //     //LampOut=DigitalInOut(pin);// потом доделаю
+         
+   //  }
+    bool LampRead;                                     //Выход лампы
+    int LampResurs_St;                                 //Ресурсное время лампы    
+    int LampResurs_Set;                                //Ручное выставление ресурсного вермени лампы    
+    int LampResusr_Res;                                //Сброс отработанного времени на выставленное лампы  
+    int LampResusr_OSt;                                //оставшееся время ресурса лампы 
+};
+
