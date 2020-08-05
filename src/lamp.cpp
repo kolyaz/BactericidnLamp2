@@ -34,11 +34,28 @@ class Lamp
 
    //  }
     Lamp(PinName pin) : LampPin(pin)  {}
-    
+
+   bool LampInit(int OnValue)
+    {
+      if (LampResusr_OSt>0)
+            {
+               LampPin=1;
+               return true;
+            }
+            else
+            {
+               LampPin=0;
+               return false;
+            }
+            
+    }
+      
     int getLampResurs_St(void)
     {
        return LampResurs_St;
     }
+
+
 
     int setLampResurs_St(int Val_St)
     {
