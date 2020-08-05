@@ -19,6 +19,16 @@ class Lamp
     private:
 
     public:
+
+
+         
+
+    DigitalOut LampPin;                              //Выход лампы
+    int LampResurs_St;                                 //Ресурсное время лампы    
+    int LampResurs_Set;                                //Ручное выставление ресурсного вермени лампы    
+    int LampResusr_Res;                                //Сброс отработанного времени на выставленное лампы  
+    int LampResusr_OSt;                                //оставшееся время ресурса лампы 
+
    //  Lamp()        //Конструктор по умолчанию (без параметров)
    //  {
 
@@ -66,13 +76,5 @@ class Lamp
        return LampResusr_OSt;
     }
 
-
-         
-
-    DigitalInOut LampPin;                              //Выход лампы
-    int LampResurs_St;                                 //Ресурсное время лампы    
-    int LampResurs_Set;                                //Ручное выставление ресурсного вермени лампы    
-    int LampResusr_Res;                                //Сброс отработанного времени на выставленное лампы  
-    int LampResusr_OSt;                                //оставшееся время ресурса лампы 
 };
 
