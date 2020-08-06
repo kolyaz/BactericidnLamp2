@@ -127,35 +127,7 @@ int OnOffint;
 
         //////////////////////////////////////Функции////////////////////////////////////////
 
-void OutInit()
-{
-  
-//   Stat_Lamp_0=LampNumber[0].LampPinOut;
-//   Stat_Lamp_1=LampNumber[1].LampPinOut;
-//   Stat_Lamp_2=LampNumber[2].LampPinOut;
-//   Stat_Lamp_3=LampNumber[3].LampPinOut;
-//   Stat_Lamp_4=LampNumber[4].LampPinOut;
-//   Stat_Lamp_5=LampNumber[5].LampPinOut;
-//   Stat_Lamp_6=LampNumber[6].LampPinOut;
-//   Stat_Lamp_7=LampNumber[7].LampPinOut;
-//   Stat_Lamp_8=LampNumber[8].LampPinOut;
-//   Stat_Lamp_9=LampNumber[9].LampPinOut;
-//   Stat_Lamp_10=LampNumber[10].LampPinOut;
-//   Stat_Lamp_11=LampNumber[11].LampPinOut;
-//   Stat_Lamp_12=LampNumber[12].LampPinOut;
-//   Stat_Lamp_13=LampNumber[13].LampPinOut;
-//   Stat_Lamp_14=LampNumber[14].LampPinOut;
-//   Stat_Lamp_15=LampNumber[15].LampPinOut;
-//   Stat_Lamp_16=LampNumber[16].LampPinOut;
-//   Stat_Lamp_17=LampNumber[17].LampPinOut;
-//   Stat_Lamp_18=LampNumber[18].LampPinOut;
-//   Stat_Lamp_19=LampNumber[19].LampPinOut;
-//   Stat_Lamp_20=LampNumber[20].LampPinOut;
-//   Stat_Lamp_21=LampNumber[21].LampPinOut;
-//   Stat_Lamp_22=LampNumber[22].LampPinOut;
-//   Stat_Lamp_23=LampNumber[23].LampPinOut;
 
-}
 
 
 //-------------------------------------------------------------------Функция чтения циклического значения в определенных пределах
@@ -221,12 +193,36 @@ void TimerObsh (int TimerSec,Timer &t)
 }
 //--------------------------------------------------------------------
 
+//---------------------------------------------------------------------Подсветка
+bool BackLight (bool LightDisp)
+{
+     
+     if (LightDisp)
+     {/*
+     
+     Обе конструкции работают, включают  подсветку, но контроллер виснит. Пока ХЗ ХЗ 
+     
+     
+     */
+         //lcd.setBacklight(lcd.LightOn);
+
+        // lcd.setBacklight(TextLCD_I2C::LCDBacklight::LightOn);
+     }
+     else
+     {
+        // lcd.setBacklight(TextLCD_I2C::LCDBacklight::LightOff);
+         //lcd.setBacklight(lcd.LightOff);
+     }    
+     
+}
+
 
 //--------------------------------------------------------------------Исключение дребезка энкодера. включение/выключение подсветки экрана
 void drebezg_encoder (int dredezg)              
 
 {
-    wait_ms(dredezg);                                                 //использование задержки для исключения дребезга      
+    wait_ms(dredezg); 
+                                                    //использование задержки для исключения дребезга      
     uint16_t    rotateNew=wheel.getPulses();                          //Чтенеие поворотов энкодера. библиотека OEI  
     bool        buttonRPG=wheelRPG.pb();                              //Чтение "кнопочного" сигнала энкодера. библиотека RPG  
         ChangeRotate = (rotate!=rotateNew) ? true : false;            //Чтение поворота энкодера без проскальзывания
@@ -234,9 +230,11 @@ void drebezg_encoder (int dredezg)
         {   
                //lcd.cls();
                //здесь должна быть подсветка экрана, выключаемая через определенное время и переменная подсветки экрана, например LightDisp 
-               LightDisp = true;                                        
+               //BackLight(LightDisp);
+               //LightDisp = true;  
+               BackLight(0);                                     
                DispLightTime = 20; 
-                                               //Через 20 сек дисплей погаснет и вернется на главный экран 
+               BackLight(1);                               //Через 20 сек дисплей погаснет и вернется на главный экран 
         }
             else 
             {
@@ -249,7 +247,8 @@ void drebezg_encoder (int dredezg)
                         } 
                             else
                             {
-                               LightDisp = false;
+                               //LightDisp = false;
+                               BackLight(0);
                                lcd.cls();
                                Level=0;
                                countB = 0;
@@ -278,6 +277,7 @@ void drebezg_encoder (int dredezg)
             {
                 button = false;
             }
+            
           
 }
 //------------------------------------------------------------------------

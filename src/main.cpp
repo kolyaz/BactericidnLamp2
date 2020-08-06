@@ -1,6 +1,7 @@
 #include "set.h"
 
 
+
 DigitalOut led(LED3);
 int main() 
 {   
@@ -12,12 +13,12 @@ int main()
     while(1)
     {
      LampInit();
-     lcd.LightOn;
-     lcd.BlinkOn;
+    
+     
     //led=!led;    
     // LampNumber[0].LampPin=(!LampNumber[0].LampPin);
-    
-    drebezg_encoder(200);                                 // вызов классов с определенной частотой (200 мс), для избежания дребезга и последовательной обработки кода программы.
+    // 
+    drebezg_encoder(200);                               // вызов классов с определенной частотой (200 мс), для избежания дребезга и последовательной обработки кода программы.
     LevelChoice (200);
     Level0 (200);
     Level1 (200);
@@ -26,6 +27,6 @@ int main()
     ResursT (200);    
     On_OffSystem(200);
    // Alarm (200);
-
+    //BackLight(dr);
     }
 }
