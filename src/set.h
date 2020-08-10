@@ -10,10 +10,6 @@
 #include "TextLCD.h"
 #include "RPG.h"
 
-
-
-
-
 #include  "lamp.cpp"
 
 
@@ -230,11 +226,10 @@ void drebezg_encoder (int dredezg)
         {   
                //lcd.cls();
                //здесь должна быть подсветка экрана, выключаемая через определенное время и переменная подсветки экрана, например LightDisp 
-               //BackLight(LightDisp);
-               //LightDisp = true;  
-               BackLight(0);                                     
-               DispLightTime = 20; 
-               BackLight(1);                               //Через 20 сек дисплей погаснет и вернется на главный экран 
+               
+               LightDisp = true;  
+                                                  
+               DispLightTime = 20;                                //Через 20 сек дисплей погаснет и вернется на главный экран 
         }
             else 
             {
@@ -247,8 +242,7 @@ void drebezg_encoder (int dredezg)
                         } 
                             else
                             {
-                               //LightDisp = false;
-                               BackLight(0);
+                               LightDisp = false;
                                lcd.cls();
                                Level=0;
                                countB = 0;
