@@ -5,7 +5,7 @@
 DigitalOut led(LED3);
 int main() 
 {   
-    t.start();                                          //включение библиотеки системного времени (библиотека Times)////tthffgt
+    t.start();                                          //включение библиотеки системного времени (библиотека Times)////tthffgt//'\l'pl'pk[pk[pokipo[k]]]
     //lcd.printf("Obsh T: %i\n", Sec);
     //lcd.printf("Work T: %i\n", Min);
     lcd.setCursor(lcd.CurOn_BlkOn); ///Курсор
