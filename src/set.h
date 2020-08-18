@@ -190,27 +190,24 @@ void TimerObsh (int TimerSec,Timer &t)
 //--------------------------------------------------------------------
 
 //---------------------------------------------------------------------Подсветка
-bool BackLight (bool LightDisp)
-{
-     
-     if (LightDisp)
-     {/*
-     
-     Обе конструкции работают, включают  подсветку, но контроллер виснит. Пока ХЗ ХЗ 
-     
-     
-     */
-         //lcd.setBacklight(lcd.LightOn);
 
-        // lcd.setBacklight(TextLCD_I2C::LCDBacklight::LightOn);
+bool BackLight (bool LightDisp)
+{     
+     if (LightDisp)
+     {  
+         lcd.setBacklight(lcd.LightOn);
      }
      else
      {
-        // lcd.setBacklight(TextLCD_I2C::LCDBacklight::LightOff);
-         //lcd.setBacklight(lcd.LightOff);
+         lcd.setBacklight(lcd.LightOff);
      }    
-     
+     return(0);     
 }
+
+//---------------------------------------------------------------------Индикатор аварии/предупреждения
+
+
+
 
 
 //--------------------------------------------------------------------Исключение дребезка энкодера. включение/выключение подсветки экрана
@@ -224,12 +221,12 @@ void drebezg_encoder (int dredezg)
         ChangeRotate = (rotate!=rotateNew) ? true : false;            //Чтение поворота энкодера без проскальзывания
         if (rotate!=rotateNew or button)                              //Условие включения подсветки дисплея  
         {   
-               //lcd.cls();
-               //здесь должна быть подсветка экрана, выключаемая через определенное время и переменная подсветки экрана, например LightDisp 
-               
-               LightDisp = true;  
-                                                  
-               DispLightTime = 20;                                //Через 20 сек дисплей погаснет и вернется на главный экран 
+               if (DispLightTime > 0) {LightDisp = 1;}
+               else
+               if (DispLightTime = 0){LightDisp = 0;}   
+               BackLight(LightDisp);                 
+                                                           
+               DispLightTime = 5;                                //Через 20 сек дисплей погаснет и вернется на главный экран 
         }
             else 
             {
@@ -371,7 +368,9 @@ void Level0(int Level0Tout)                     //Начальный экран 
             {
                 lcd.printf("Obsh T: %i:%i\n", Sec, Min);            //ВЫВЕДЕНЫ ДЛЯ ТЕСТИРОВАНИЯ
                 lcd.printf("Work T: %i\n", Min);
-                printf("Rotate: %i\n", rotate);
+                //printf("Rotate: %i\n", rotate);
+                lcd.locate(13,0);
+                lcd.printf("<!>");
             }
     }
 
