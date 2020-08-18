@@ -9,10 +9,14 @@
 #include "QEI_N.h"
 #include "TextLCD.h"
 #include "RPG.h"
+#include "Alarm.h"
 
 #include  "lamp.cpp"
 
 
+
+Alarm alarm1;
+bool alarm11;
 
 
 
@@ -196,6 +200,7 @@ bool BackLight (bool LightDisp)
      if (LightDisp)
      {  
          lcd.setBacklight(lcd.LightOn);
+        alarm11 = alarm1.AlarmLamp(true);     
      }
      else
      {
@@ -224,12 +229,13 @@ void drebezg_encoder (int dredezg)
                if (DispLightTime > 0) {LightDisp = 1;}
                else
                if (DispLightTime = 0){LightDisp = 0;}   
-               BackLight(LightDisp);                 
-                                                           
+               BackLight(LightDisp);
+
                DispLightTime = 5;                                //Через 20 сек дисплей погаснет и вернется на главный экран 
         }
             else 
             {
+                alarm11 = alarm1.AlarmLamp(false);  
                 TikTimeD = TikTime (TimeOldD, Sec);                    //Функция для отчета времени с момента НЕактивности энкодера
                 if (TikTimeD)
                     {
@@ -369,10 +375,21 @@ void Level0(int Level0Tout)                     //Начальный экран 
                 lcd.printf("Obsh T: %i:%i\n", Sec, Min);            //ВЫВЕДЕНЫ ДЛЯ ТЕСТИРОВАНИЯ
                 lcd.printf("Work T: %i\n", Min);
                 //printf("Rotate: %i\n", rotate);
-                lcd.locate(13,0);
-                lcd.printf("<!>");
+
+                if (alarm11 == 1)
+                {
+                    lcd.locate(15,0);
+                    lcd.printf("!");           
+                }
+                else
+                {
+                    lcd.locate(15,0);
+                    lcd.printf(" ");
+                }        
+
             }
     }
+
 
 void Level1(int Level1Tout)                     //перемещение в 1 уровне. выбор изменяемого параметра и значние оставшегося ресурса.
     {
