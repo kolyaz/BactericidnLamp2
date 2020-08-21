@@ -14,7 +14,11 @@ int main()
     while(1)
     {
      LampInit();
-    
+     printf("Sec: %i\n", SecSystem);
+     printf("rotate: %i\n", SetPointGeneralResurs);
+     printf("Level: %i\n", LampNumber[0].LampResurs_Set);
+
+   
      
     //led=!led;    
     // LampNumber[0].LampPin=(!LampNumber[0].LampPin);
@@ -24,6 +28,8 @@ int main()
     Level0 (200);
     Level1 (200);
     Level2 (200);
+    LevelOptions();
+
     TimerObsh (900,t);
     ResursT (200);    
     On_OffSystem(200);
