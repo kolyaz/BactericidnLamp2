@@ -10,11 +10,13 @@
 #include "TextLCD.h"
 #include "RPG.h"
 #include "Alarm.h"
+#include "GenButton.h"
 
 #include  "lamp.cpp"
 
 
-
+GenButton GeneralButton;
+bool ButtonSaveChange;
 Alarm alarm1;
 bool alarm11;
 
@@ -212,6 +214,21 @@ bool BackLight (bool LightDisp)
      }    
      return(0);     
 }
+//---------------------------------------------------------------------Логика с кнопкой
+int ButtonClick (){
+
+    ButtonSaveChange = GeneralButton.ButtonSaveMode(button, Sec);  
+    return(0);    
+}
+
+
+
+
+
+
+
+ 
+
 
 //---------------------------------------------------------------------Индикатор аварии/предупреждения
 
@@ -269,10 +286,10 @@ void drebezg_encoder (int dredezg)
             button = true;                                              
             countB++;                                                  //Количество нажатий на кнопку 
             lcd.cls();                                                 //Очистка экрана
-            printf("нажатий: %i\n", NMenuL2);       
-            printf("Дисплей: %i\n", LightDisp);       
-            printf("Кнопка: %i\n", button);
-            printf("Поворот: %i\n", rotate); 
+            //printf("нажатий: %i\n", NMenuL2);       
+            //printf("Дисплей: %i\n", LightDisp);       
+            //printf("Кнопка: %i\n", button);
+            //printf("Поворот: %i\n", rotate); 
         }
             else
             {
@@ -341,15 +358,7 @@ void LevelChoice (int LevelUD)                  //переход по уровн
         rotate = 0;
         countB = 0;                             //сброс количества нажатий на кнопку, в программе
     }
-        /*else if (button and (Level == 1) and !Level1Back and (NMenuL1>=COUNTLAMP))
-        {
-             Level = 9;                              //вход в один из параметров
-             NMenuL2 = NMenuL2 + rotate;             //переход на выбранную строку меню
-             wheel.reset();
-             rotate = 0;
-             countB = 0;  
-        }*/
-        
+      
 
        // else if (button and (Level == 2))      //Запасной уровень
     //{
@@ -388,15 +397,17 @@ void LevelOptions(){                         //уровень с настрой�
 
         SetPointGeneralResurs = rotate;
         lcd.printf("Set Point: %i\n", SetPointGeneralResurs);
-        if (button)
+        lcd.printf("\n");
+        if (ButtonSaveChange)
         {                
             for (size_t i = 0; i < 23; i++)
             {
                 LampNumber[i].LampResurs_Set = SetPointGeneralResurs;
                 LampNumber[i].LampResurs_St = SetPointGeneralResurs;
                 LampNumber[i].LampResusr_OSt = SetPointGeneralResurs;
-            }                       
-        }
+            }
+            Level = 0;                       
+        }        
     } 
  }
 

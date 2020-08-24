@@ -14,10 +14,11 @@ int main()
     while(1)
     {
      LampInit();
-     printf("Sec: %i\n", SecSystem);
-     printf("rotate: %i\n", SetPointGeneralResurs);
-     printf("Level: %i\n", LampNumber[0].LampResurs_Set);
-
+     printf("but: %i\n", ButtonSaveChange);
+     printf("button: %i\n", button);
+     //printf("rotate: %i\n", SetPointGeneralResurs);
+     //printf("Level: %i\n", LampNumber[0].LampResurs_Set);
+     printf("Sec: %i\n", Sec);
    
      
     //led=!led;    
@@ -34,6 +35,7 @@ int main()
     ResursT (200);    
     On_OffSystem(200);
    // Alarm (200);
+   ButtonClick();
     
     }
 }
