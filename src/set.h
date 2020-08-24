@@ -17,10 +17,13 @@
 
 GenButton GeneralButton;
 bool ButtonSaveChange;
+bool ButtonClick;
+int ButtonCounter;
+
 Alarm alarm1;
 bool alarm11;
 
-
+bool b = 1;
 
 
 
@@ -121,6 +124,7 @@ int L2Resusr_Res;                                //Сброс отработан
 int L2Resusr_OSt;                                //оставшееся время ресурса лампы 2
 
 int SetPointGeneralResurs;                       //Общая уставка для всех ламп
+int CoefficientResourse;                         //Общий коэффициент ресурса ламп
 
 
 
@@ -215,10 +219,12 @@ bool BackLight (bool LightDisp)
      }    
      return(0);     
 }
-//---------------------------------------------------------------------Логика с кнопкой
-int ButtonSaveClick (){
+//---------------------------------------------------------------------Логика кнопки
+int Button (){
 
     ButtonSaveChange = GeneralButton.ButtonSaveMode(button, Sec);  
+    ButtonClick = GeneralButton.ButtonOneClick(button);
+    ButtonCounter = GeneralButton.ButtonClickCounter(button, 0);
     return(0);    
 }
 
@@ -398,9 +404,15 @@ void LevelOptions(){                         //уровень с настрой�
     
     if (Level == 9){
 
+        //задание общей уставки для всех ламп
+
+        lcd.cls();
+
         SetPointGeneralResurs = rotate;
+        CoefficientResourse = rotate;
+
         lcd.printf("Set Point: %i\n", SetPointGeneralResurs);
-        lcd.printf("\n");
+        lcd.printf("Kl: %i\n", CoefficientResourse);
         if (ButtonSaveChange)
         {                
             for (size_t i = 0; i < 23; i++)
@@ -410,7 +422,14 @@ void LevelOptions(){                         //уровень с настрой�
                 LampNumber[i].LampResusr_OSt = SetPointGeneralResurs;
             }
             Level = 0;                       
-        }        
+        }
+
+        //задание коэффициента сокращения ресурса ламп
+        //при условиях
+
+        
+
+
     } 
  }
 
