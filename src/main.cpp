@@ -15,7 +15,7 @@ int main()
     {
      LampInit();
      printf("but: %i\n", ButtonSaveChange);
-     printf("button: %i\n", button);
+     printf("button: %i\n", buttonClick);
      //printf("rotate: %i\n", SetPointGeneralResurs);
      //printf("Level: %i\n", LampNumber[0].LampResurs_Set);
      printf("Sec: %i\n", Sec);
@@ -35,6 +35,7 @@ int main()
     ResursT (200);    
     On_OffSystem(200);
    // Alarm (200);
+   ButtonSaveClick();
    ButtonClick();
     
     }

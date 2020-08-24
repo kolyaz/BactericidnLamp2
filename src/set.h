@@ -23,6 +23,7 @@ bool alarm11;
 
 
 
+
 QEI wheel (PB_6,PB_7,PC_13, 24); //(pinA, pinB, button, countobor)
 RPG wheelRPG (PB_6,PB_7,PC_13);
 I2C i2c_lcd( I2C_SDA,I2C_SCL); // I2C_SDA, I2C_SCL
@@ -215,11 +216,13 @@ bool BackLight (bool LightDisp)
      return(0);     
 }
 //---------------------------------------------------------------------Логика с кнопкой
-int ButtonClick (){
+int ButtonSaveClick (){
 
     ButtonSaveChange = GeneralButton.ButtonSaveMode(button, Sec);  
     return(0);    
 }
+
+
 
 
 

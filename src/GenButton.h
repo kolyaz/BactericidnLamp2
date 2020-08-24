@@ -4,30 +4,36 @@
 class GenButton
 {
 private:
+int a[5];
+
+
+int FirstSecond;
+bool SaveChange;
+const int TimeDelaySaveChange = 3;
+bool buttonOneClick;
     
     
 
 public:
-int FirstSecond;
-bool SaveChange;
-int a = 0;
-const int TimeDelaySaveChange = 3;
+
 
     //Метод ButtonSaveMode служит для формирования сигнала на сохраниение
     //изменнных данных. Формирует true при Button == true, через время
-    //в TimeDelaySaveChange.
+    //в TimeDelaySaveChange.     
 
     int ButtonSaveMode (bool Button, int Sec)
-    {      
-        if (a == 0)
+    
+    {
+        if (a[0] == 0)
             {
                 FirstSecond = Sec;
-                a = 1;
+                a[0] = 1;
+                
             }
 
         if(Button  == true){
           
-            if (((FirstSecond + TimeDelaySaveChange) <= Sec) && a == 1)
+            if (((FirstSecond + TimeDelaySaveChange) <= Sec) && a[0] == 1)
             {
                 SaveChange = true;
             }            
@@ -39,9 +45,36 @@ const int TimeDelaySaveChange = 3;
         if (Button == false){
 
             SaveChange = false;
-            a = 0;
+            a[0] = 0;
         }    
         return(SaveChange);
+    }
+
+    //Метод ButtonOneClick служит для формирования одиночного имульса
+    //при нажатии на кнопку.
+
+    int ButtonOneClick (bool Button)
+    {
+        if (Button && a[1] == 0){
+
+            buttonOneClick = true;
+        }
+        else
+        {
+            buttonOneClick = false;
+        }
+        
+        
+        if (buttonOneClick){
+            
+            a[1] = 1;
+        }
+
+        if (Button == false)
+        {
+            a[1] = 0;
+        }
+        return(buttonOneClick);
     }
 
 }; 
