@@ -19,6 +19,8 @@ GenButton GeneralButton;
 bool ButtonSaveChange;
 bool ButtonClick;
 int ButtonCounter;
+int DirOfRot;
+
 
 Alarm alarm1;
 bool alarm11;
@@ -225,6 +227,8 @@ int Button (){
     ButtonSaveChange = GeneralButton.ButtonSaveMode(button, Sec);  
     ButtonClick = GeneralButton.ButtonOneClick(button);
     ButtonCounter = GeneralButton.ButtonClickCounter(button, 0);
+    DirOfRot = GeneralButton.EncoderDirectionOfRotation(rotate, Sec);
+        
     return(0);    
 }
 
@@ -411,7 +415,9 @@ void LevelOptions(){                         //уровень с настрой�
         SetPointGeneralResurs = rotate;
         CoefficientResourse = rotate;
 
+        lcd.locate(1, 0); 
         lcd.printf("Set Point: %i\n", SetPointGeneralResurs);
+        lcd.locate(1, 1); 
         lcd.printf("Kl: %i\n", CoefficientResourse);
         if (ButtonSaveChange)
         {                

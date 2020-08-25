@@ -13,6 +13,19 @@ const int TimeDelaySaveChange = 2;
 bool buttonOneClick;
 bool ResetCounter;
 int count;
+
+
+int RotationSave;
+/*bool RotationRight;
+bool RotationLeft;
+bool RotationNoActivitty;*/
+int DirectionOfRotation;
+
+int NewSec;
+int OldSec;
+bool LoopRecording;
+const int LoopRecordingTime = 1;    //время циклической перезаписи
+
     
     
 
@@ -29,12 +42,10 @@ public:
         if (a[0] == 0)
             {
                 FirstSecond = Sec;
-                a[0] = 1;
-                
+                a[0] = 1;                
             }
 
-        if(Button  == true){
-          
+        if(Button  == true){          
             if (((FirstSecond + TimeDelaySaveChange) <= Sec) && a[0] == 1)
             {
                 SaveChange = true;
@@ -95,6 +106,45 @@ public:
 
         return(count);        
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    //Метод EncoderRotation служит для определения направления вращения энкодера
+    
+    int EncoderDirectionOfRotation (int Rotation, int Sec){
+        if (a[2] == 0){
+            OldSec = Sec;
+            LoopRecording = 0;            
+            a[2] = 1;
+        }
+        if (((Sec-LoopRecordingTime) == OldSec) && (a[2] == 1)){
+            LoopRecording = 1;
+            a[2] = 0;
+        }
+
+        if (LoopRecording){
+            RotationSave = Rotation;
+        }
+        if (Rotation > RotationSave){         //энкодер вращается вправо
+            DirectionOfRotation = 3;
+
+        } else if (Rotation < RotationSave){    //энкодер вращается влево
+            DirectionOfRotation = 1;
+
+        } else if (Rotation == RotationSave && LoopRecording == 0){   //энкодер не вращается
+            DirectionOfRotation = 2;
+        }
+
+        return(DirectionOfRotation);
+        
+
+       
+
+        
+
+
+
+    }
+
 }; 
 
 
