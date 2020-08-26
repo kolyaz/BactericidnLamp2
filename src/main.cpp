@@ -10,18 +10,24 @@ int main()
     t.start();                                          //включение библиотеки системного времени (библиотека Times)////tthffgt
     //lcd.printf("Obsh T: %i\n", Sec);
     //lcd.printf("Work T: %i\n", Min);
+    //lcd.setCursor(lcd.CurOn_BlkOn); ///Курсор
     
-    
-    lcd.setCursor(lcd.CurOn_BlkOn); ///Курсор
+
+
     
     while(1)
     {
      LampInit();
-     //printf("but: %i\n", ButtonCounter);
-     //printf("Loop: %i\n", ButtonClick);
-     printf("DirofRot: %i\n", DirOfRot);
+     printf("ButtonClick: %i\n", FTrig);
+     printf("a1 %i\n", a1);
+     printf("a2: %i\n", a2);
+     printf("rotate: %i\n", rotate);
      //printf("Level: %i\n", LampNumber[0].LampResurs_Set);
      printf("Sec: %i\n", Sec);
+
+    
+
+
    
      
     //led=!led;    

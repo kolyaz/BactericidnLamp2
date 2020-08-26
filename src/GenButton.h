@@ -11,6 +11,7 @@ int FirstSecond;
 bool SaveChange;
 const int TimeDelaySaveChange = 2;  
 bool buttonOneClick;
+bool buttonOneClickFTrigger;
 bool ResetCounter;
 int count;
 
@@ -64,9 +65,9 @@ public:
 
     ///////////////////////////////////////////////////////////////////////
     //Метод ButtonOneClick служит для формирования одиночного имульса
-    //при нажатии на кнопку.
+    //при нажатии на кнопку. Работает по принципу Rising Trigger
 
-    int ButtonOneClick(bool Button)
+    int ButtonOneClickRTrigger(bool Button)
     {
         if (Button && a[1] == 0){
             buttonOneClick = true;
@@ -74,8 +75,7 @@ public:
         else
         {
             buttonOneClick = false;
-        }
-        
+        }        
         
         if (buttonOneClick){            
             a[1] = 1;
@@ -87,6 +87,36 @@ public:
         }
         return(buttonOneClick);
     }
+
+    ///////////////////////////////////////////////////////////////////////
+    //Метод ButtonOneClick служит для формирования одиночного имульса
+    //при нажатии на кнопку. Работает по принципу Falling Trigger
+
+        int ButtonOneClickFTrigger(bool Button)
+    {
+        if (Button)
+        {
+            a[3] = 1;   
+        }
+        if (Button == false && a[3] == 1)
+        {
+            buttonOneClickFTrigger = true;
+        }
+        else
+        {
+            buttonOneClickFTrigger = false;
+        }
+        
+        if (buttonOneClickFTrigger == true && Button == false)
+        {
+            a[3] = 0;                      
+        }
+        return(buttonOneClickFTrigger);
+    }
+
+
+
+
 
     ///////////////////////////////////////////////////////////////////////
     //Метод ButtonClickCounter выполняет функцию счетчика кол-ва нажатий
@@ -108,7 +138,8 @@ public:
     }
 
     ///////////////////////////////////////////////////////////////////////
-    //Метод EncoderRotation служит для определения направления вращения энкодера
+    //Метод EncoderDirectionOfRotation служит для определения направления вращения энкодера
+    //..........1-влево..........2-не вращается..........3-вправо..........
     
     int EncoderDirectionOfRotation (int Rotation, int Sec){
         if (a[2] == 0){

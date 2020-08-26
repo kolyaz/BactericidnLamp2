@@ -21,11 +21,18 @@ bool ButtonClick;
 int ButtonCounter;
 int DirOfRot;
 
+bool FTrig;
+
+
 
 Alarm alarm1;
 bool alarm11;
 
-bool b = 1;
+bool a1 = 0;
+bool b1 = 0;
+
+bool a2 = 0;
+bool b2 = 0;
 
 
 
@@ -223,11 +230,11 @@ bool BackLight (bool LightDisp)
 }
 //---------------------------------------------------------------------Логика кнопки
 int Button (){
-
+  
     ButtonSaveChange = GeneralButton.ButtonSaveMode(button, Sec);  
-    ButtonClick = GeneralButton.ButtonOneClick(button);
     ButtonCounter = GeneralButton.ButtonClickCounter(button, 0);
     DirOfRot = GeneralButton.EncoderDirectionOfRotation(rotate, Sec);
+    ButtonClick = GeneralButton.ButtonOneClickFTrigger(button);
         
     return(0);    
 }
@@ -236,15 +243,7 @@ int Button (){
 
 
 
-
-
-
-
- 
-
-
 //---------------------------------------------------------------------Индикатор аварии/предупреждения
-
 
 
 
@@ -409,16 +408,75 @@ void LevelOptions(){                         //уровень с настрой�
     if (Level == 9){
 
         //задание общей уставки для всех ламп
-
         lcd.cls();
 
-        SetPointGeneralResurs = rotate;
-        CoefficientResourse = rotate;
+        //SetPointGeneralResurs = rotate;
+        //CoefficientResourse = rotate;
 
         lcd.locate(1, 0); 
         lcd.printf("Set Point: %i\n", SetPointGeneralResurs);
         lcd.locate(1, 1); 
-        lcd.printf("Kl: %i\n", CoefficientResourse);
+        lcd.printf("K_lamp: %i\n", CoefficientResourse);
+
+
+        if (a1)
+        {
+            lcd.locate(0, 0); 
+            lcd.printf("-"); 
+        } else if (a2)
+        {
+            lcd.locate(0, 1); 
+            lcd.printf("-");
+        } else if (a1 == 0 && a2 == 0)
+        {
+            lcd.locate(0, rotate); 
+            lcd.printf(">");            
+        }
+
+        if (a1 == 0 && a2 == 0 && rotate > 2)
+        {
+            wheel.reset();                          //Сброс количества оборотов энкодера
+            rotate = 0;                             //Обнуление оборотов переменной во всей программе
+        }
+        
+
+
+        if (rotate == 0 && ButtonClick == 1)
+        {
+            a1 = 1;                        
+        }
+            if (a1 == 1)                                 //жОйский костыль :/
+            {
+                SetPointGeneralResurs = rotate;                         
+            }
+                if (a1 == 1 && ButtonClick == 0)
+                {
+                    b1 = 1;
+                }
+                    if (b1 == 1 && ButtonClick == 1)
+                    {
+                        a1 = 0;
+                        b1 = 0;
+                    }
+
+        if (rotate == 1 && ButtonClick == 1)
+        {
+            a2 = 1;            
+        }
+            if (a2 == 1)                                 //жОйский костыль :/
+            {
+                CoefficientResourse = rotate;                         
+            }
+                if (a2 == 1 && ButtonClick == 0)
+                {
+                    b2 = 1;
+                }
+                    if (b2 == 1 && ButtonClick == 1)
+                    {
+                        a2 = 0;
+                        b2 = 0;
+                    }
+    
         if (ButtonSaveChange)
         {                
             for (size_t i = 0; i < 23; i++)
@@ -427,15 +485,12 @@ void LevelOptions(){                         //уровень с настрой�
                 LampNumber[i].LampResurs_St = SetPointGeneralResurs;
                 LampNumber[i].LampResusr_OSt = SetPointGeneralResurs;
             }
-            Level = 0;                       
+            Level = 0;
+            a1 = 0;
+            b1 = 0;
+            a2 = 0;
+            b2 = 0;                       
         }
-
-        //задание коэффициента сокращения ресурса ламп
-        //при условиях
-
-        
-
-
     } 
  }
 
@@ -447,8 +502,7 @@ void Level0(int Level0Tout)                     //Начальный экран 
             {
                 lcd.printf("Obsh T: %i:%i\n", Sec, Min);            //ВЫВЕДЕНЫ ДЛЯ ТЕСТИРОВАНИЯ
                 lcd.printf("Work T: %i\n", Min);
-                //printf("Rotate: %i\n", rotate);
-
+               
                 if (alarm11 == 1)
                 {
                     lcd.locate(15,0);
