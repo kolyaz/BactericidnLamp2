@@ -12,6 +12,7 @@
 #include "Alarm.h"
 #include "GenButton.h"
 
+
 #include  "Lamp.cpp"
 
 
@@ -22,7 +23,7 @@ int ButtonCounter;
 int DirOfRot;
 
 bool FTrig;
-
+int res;
 
 
 Alarm alarm1;
@@ -184,7 +185,8 @@ bool TikTime (int TimePrOld, int TimePr)
 //--------------------------------------------------------------------Счетчик времени
 void TimerObsh (int TimerSec,Timer &t)              
 {
-    if (LightDisp)                                  //Условие включения счетчика (планируется активация при включении установки). 
+    if (LightDisp)
+                                                    //Условие включения счетчика (планируется активация при включении установки). 
                                                     //Сейчас сделано включение при активации подсветки при любом изменении энкодера.
         {
             SecSystem = (int)t.read();              //Чтение системного вермени. Библиотека "Timer"    
@@ -221,7 +223,7 @@ bool BackLight (bool LightDisp)
      if (LightDisp)
      {  
          lcd.setBacklight(lcd.LightOn);
-        alarm11 = alarm1.alarmLamp(true);     //индикация аварии (пока подвязал сюда для теста)
+        alarm11 = alarm1.indicatorAlarmLamp(true);     //индикация аварии (пока подвязал сюда для теста)
      }
      else
      {
@@ -267,7 +269,7 @@ void drebezg_encoder (int dredezg)
         }
             else 
             {
-                alarm11 = alarm1.alarmLamp(false);  
+                alarm11 = alarm1.indicatorAlarmLamp(false);  
                 TikTimeD = TikTime (TimeOldD, Sec);                    //Функция для отчета времени с момента НЕактивности энкодера
                 if (TikTimeD)
                     {
@@ -496,7 +498,7 @@ void LevelOptions(){                         //уровень с настрой�
 void Level0(int Level0Tout)                     //Начальный экран (отображение общего начального ресурса установки, общего оставшегося ресурса)
     {
         if (Level==0)
-            {
+            /*{
                 lcd.printf("Obsh T: %i:%i\n", Sec, Min);            //ВЫВЕДЕНЫ ДЛЯ ТЕСТИРОВАНИЯ
                 lcd.printf("Work T: %i\n", Min);
                
@@ -510,6 +512,14 @@ void Level0(int Level0Tout)                     //Начальный экран 
                     lcd.locate(15,0);
                     lcd.printf(" ");
                 } 
+            }*/
+            {
+                   
+
+                lcd.printf("Lamp %i", rotate, "\n");
+                lcd.locate(9, 0);                          
+                lcd.printf("%i\n", LampNumber[0].LampResusr_OSt);
+                lcd.printf("\n");  
             }
     }
 
