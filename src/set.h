@@ -6,13 +6,13 @@
 //
 ////////////////////////////////////////////////////////////////////////////////////////////
 #include <mbed.h>
-#include "QEI_N.h"
-#include "TextLCD.h"
-#include "RPG.h"
+#include "QEI/QEI_N.h"
+#include "TextLCD/TextLCD.h"
+#include "RPG/RPG.h"
 #include "Alarm.h"
 #include "GenButton.h"
 
-#include  "lamp.cpp"
+#include  "Lamp.cpp"
 
 
 GenButton GeneralButton;
@@ -220,7 +220,7 @@ bool BackLight (bool LightDisp)
      if (LightDisp)
      {  
          lcd.setBacklight(lcd.LightOn);
-        alarm11 = alarm1.AlarmLamp(true);     //индикация аварии (пока подвязал сюда для теста)
+        alarm11 = alarm1.alarmLamp(true);     //индикация аварии (пока подвязал сюда для теста)
      }
      else
      {
@@ -231,10 +231,8 @@ bool BackLight (bool LightDisp)
 //---------------------------------------------------------------------Логика кнопки
 int Button (){
   
-    ButtonSaveChange = GeneralButton.ButtonSaveMode(button, Sec);  
-    ButtonCounter = GeneralButton.ButtonClickCounter(button, 0);
-    DirOfRot = GeneralButton.EncoderDirectionOfRotation(rotate, Sec);
-    ButtonClick = GeneralButton.ButtonOneClickFTrigger(button);
+    ButtonSaveChange = GeneralButton.buttonSaveMode(button, Sec);  
+    ButtonClick = GeneralButton.buttonOneClickFTrigger(button);
         
     return(0);    
 }
@@ -268,7 +266,7 @@ void drebezg_encoder (int dredezg)
         }
             else 
             {
-                alarm11 = alarm1.AlarmLamp(false);  
+                alarm11 = alarm1.alarmLamp(false);  
                 TikTimeD = TikTime (TimeOldD, Sec);                    //Функция для отчета времени с момента НЕактивности энкодера
                 if (TikTimeD)
                     {

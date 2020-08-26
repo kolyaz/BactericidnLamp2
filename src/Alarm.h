@@ -7,7 +7,7 @@ private:
 
 public:
     //Авария лампы
-  int AlarmLamp(bool ActiveAlarmLamp){        
+  int alarmLamp(bool ActiveAlarmLamp){        
 
         if (ActiveAlarmLamp)
         {

@@ -10,8 +10,9 @@ int a[5];
 int FirstSecond;
 bool SaveChange;
 const int TimeDelaySaveChange = 2;  
+bool buttonRTrigger;
+bool buttonFTrigger;
 bool buttonOneClick;
-bool buttonOneClickFTrigger;
 bool ResetCounter;
 int count;
 
@@ -37,7 +38,7 @@ public:
     //изменнных данных. Формирует true при Button == true, через время
     //в TimeDelaySaveChange.     
     
-    int ButtonSaveMode(bool Button, int Sec)
+    int buttonSaveMode(bool Button, int Sec)
     
     {
         if (a[0] == 0)
@@ -67,17 +68,17 @@ public:
     //Метод ButtonOneClick служит для формирования одиночного имульса
     //при нажатии на кнопку. Работает по принципу Rising Trigger
 
-    int ButtonOneClickRTrigger(bool Button)
+    int buttonOneClickRTrigger(bool Button)
     {
         if (Button && a[1] == 0){
-            buttonOneClick = true;
+            buttonRTrigger = true;
         }
         else
         {
-            buttonOneClick = false;
+            buttonRTrigger = false;
         }        
         
-        if (buttonOneClick){            
+        if (buttonRTrigger){            
             a[1] = 1;
         }
 
@@ -85,14 +86,14 @@ public:
         {
             a[1] = 0;
         }
-        return(buttonOneClick);
+        return(buttonRTrigger);
     }
 
     ///////////////////////////////////////////////////////////////////////
     //Метод ButtonOneClick служит для формирования одиночного имульса
     //при нажатии на кнопку. Работает по принципу Falling Trigger
 
-        int ButtonOneClickFTrigger(bool Button)
+        int buttonOneClickFTrigger(bool Button)
     {
         if (Button)
         {
@@ -100,18 +101,18 @@ public:
         }
         if (Button == false && a[3] == 1)
         {
-            buttonOneClickFTrigger = true;
+            buttonFTrigger = true;
         }
         else
         {
-            buttonOneClickFTrigger = false;
+            buttonFTrigger = false;
         }
         
-        if (buttonOneClickFTrigger == true && Button == false)
+        if (buttonFTrigger == true && Button == false)
         {
             a[3] = 0;                      
         }
-        return(buttonOneClickFTrigger);
+        return(buttonFTrigger);
     }
 
 
@@ -122,7 +123,7 @@ public:
     //Метод ButtonClickCounter выполняет функцию счетчика кол-ва нажатий
     //кнопки. Для сброса счетчика требуется записать "1" в ResetCounter.
 
-    int ButtonClickCounter(bool Button, bool ResetCounter){
+    int buttonClickCounter(bool Button, bool ResetCounter){
 
         if (buttonOneClick){
             for (size_t i = 0; i < 1; i++)
@@ -141,7 +142,7 @@ public:
     //Метод EncoderDirectionOfRotation служит для определения направления вращения энкодера
     //..........1-влево..........2-не вращается..........3-вправо..........
     
-    int EncoderDirectionOfRotation (int Rotation, int Sec){
+    int encoderDirectionOfRotation (int Rotation, int Sec){
         if (a[2] == 0){
             OldSec = Sec;
             LoopRecording = 0;            
