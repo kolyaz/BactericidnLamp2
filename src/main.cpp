@@ -18,7 +18,7 @@ int main()
     while(1)
     {
      LampInit();
-     printf("ButtonClick: %i\n", FTrig);
+     //printf("res: %i\n", res);
      printf("a1 %i\n", a1);
      printf("a2: %i\n", a2);
      printf("rotate: %i\n", rotate);

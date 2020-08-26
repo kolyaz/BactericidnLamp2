@@ -6,8 +6,11 @@ private:
 
 
 public:
-    //Авария лампы
-  int alarmLamp(bool ActiveAlarmLamp){        
+    
+////////////////////////////////////////////////////////////
+//Индикация аларма лампы. Возвращает True или False
+
+  int indicatorAlarmLamp(bool ActiveAlarmLamp){        
 
         if (ActiveAlarmLamp)
         {
@@ -17,11 +20,6 @@ public:
         {
             return(0);
         }
-
     }
-
 };
-
-
-
 
