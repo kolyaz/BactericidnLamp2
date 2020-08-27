@@ -27,9 +27,7 @@ int NewSec;
 int OldSec;
 bool LoopRecording;
 const int LoopRecordingTime = 1;    //время циклической перезаписи
-
-    
-    
+   
 
 public:
 

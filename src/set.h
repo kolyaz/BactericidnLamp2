@@ -19,22 +19,19 @@
 GenButton GeneralButton;
 bool ButtonSaveChange;
 bool ButtonClick;
-int ButtonCounter;
-int DirOfRot;
-
-bool FTrig;
-int res;
-
 
 Alarm alarm1;
 bool alarm11;
 
 bool a1 = 0;
 bool b1 = 0;
-
 bool a2 = 0;
 bool b2 = 0;
-bool backToMain = 0;
+
+int c[5];
+bool x = 1;
+
+
 
 
 
@@ -122,7 +119,7 @@ bool ResCountOnOff;                              //Сброс количеств
 int Resurs_Time_St;                              //Ресурсное время, выставленное 
 int Resurs_Time_Set;                             //Ручное выставление ресурсного времени 
 bool OnOffRes;                                   //Сокращение ресурса при вкл/выключении 
-int KoefOnOffRes=3;                              //Коэффициент, который отвечет за снижение ресурса лампы от количества включений/выключений   
+int KoefOnOffRes;                              //Коэффициент, который отвечет за снижение ресурса лампы от количества включений/выключений   
  
 int L1Resurs_St;                                 //Ресурсное время лампы 1   
 int L1Resurs_Set;                                //Ручное выставление ресурсного вермени лампы 1   
@@ -135,7 +132,7 @@ int L2Resusr_Res;                                //Сброс отработан
 int L2Resusr_OSt;                                //оставшееся время ресурса лампы 2
 
 int SetPointGeneralResurs;                       //Общая уставка для всех ламп
-int CoefficientResourse;                         //Общий коэффициент ресурса ламп
+//int CoefficientResourse;                         //Общий коэффициент ресурса ламп
 
 
 
@@ -185,9 +182,7 @@ bool TikTime (int TimePrOld, int TimePr)
 //--------------------------------------------------------------------Счетчик времени
 void TimerObsh (int TimerSec,Timer &t)              
 {
-    if (LightDisp)
-                                                    //Условие включения счетчика (планируется активация при включении установки). 
-                                                    //Сейчас сделано включение при активации подсветки при любом изменении энкодера.
+    if (x == 1)                                                    //Условие включения счетчика (планируется активация при включении установки). 
         {
             SecSystem = (int)t.read();              //Чтение системного вермени. Библиотека "Timer"    
                 if (SecSystemOld != SecSystem)      //
@@ -408,13 +403,12 @@ void LevelOptions(){                         //уровень с настрой�
         //задание общей уставки для всех ламп
         lcd.cls();
 
-        //SetPointGeneralResurs = rotate;
-        //CoefficientResourse = rotate;
 
         lcd.locate(1, 0); 
         lcd.printf("Set Point: %i\n", SetPointGeneralResurs);
         lcd.locate(1, 1); 
-        lcd.printf("K_lamp: %i\n", CoefficientResourse);
+        lcd.printf("K_lamp: %i\n", KoefOnOffRes);
+         
 
 
         if (a1)
@@ -463,7 +457,7 @@ void LevelOptions(){                         //уровень с настрой�
         }
             if (a2 == 1)                                 //жОйский костыль :/
             {
-                CoefficientResourse = rotate;                         
+                KoefOnOffRes = rotate;                         
             }
                 if (a2 == 1 && ButtonClick == 0)
                 {
@@ -514,12 +508,15 @@ void Level0(int Level0Tout)                     //Начальный экран 
                 } 
             }*/
             {
-                   
+              
 
-                lcd.printf("Lamp %i", rotate, "\n");
-                lcd.locate(9, 0);                          
+                lcd.printf("SP_Res:\n");
+                lcd.locate(10, 0);                          
+                lcd.printf("%i\n", SetPointGeneralResurs);
+
+                lcd.printf("W_Res:\n");                
+                lcd.locate(10, 1);                          
                 lcd.printf("%i\n", LampNumber[0].LampResusr_OSt);
-                lcd.printf("\n");  
             }
     }
 
