@@ -20,7 +20,7 @@ int main()
      LampInit();
      //printf("res: %i\n", res);
      //printf("a1 %i\n", a1);
-     printf("g: %i\n", g);
+     //printf("g: %i\n", g);
      printf("rotate: %i\n", rotate);
      //printf("Level: %i\n", LampNumber[0].LampResurs_Set);
      printf("Sec: %i\n", Sec);

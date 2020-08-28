@@ -28,11 +28,10 @@ bool b1 = 0;
 bool a2 = 0;
 bool b2 = 0;
 
-int c[5];
 bool x = 1;
 
-int rotateTest;
-int g = 0;
+
+
 
 
 
@@ -277,7 +276,7 @@ void drebezg_encoder (int dredezg)
                             else
                             {
                                LightDisp = false;
-                               lcd.cls();
+                              // lcd.cls();
                                Level=0;
                                countB = 0;
                                wheel.reset();
@@ -305,9 +304,7 @@ void drebezg_encoder (int dredezg)
              
         if (buttonRPG)                                                 //Условие чтения импульсного значения для переменной button, которая будет использоваться в программе
         {
-            button = true;                                              
-            //countB++;                                                  //Количество нажатий на кнопку 
-            //lcd.cls();                                                 //Очистка экрана
+            button = true;                                           
         }
         else
         {
@@ -328,12 +325,10 @@ void ResursT (int ResursTime)                   // Ресурсное время
    {                                                                                   //стандартный ресурс (почасовой)
         if (!OnOffRes)                                                                 //импульс включения и вычета коэффициента от ресурса                 
             {
-              for (size_t i = 0; i < COUNTLAMP; i++)
-              {
-                  (LampNumber[i].LampResusr_OSt > 0) ? LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt - KoefOnOffRes: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
-              }
-              //(L1Resusr_OSt > 0) ? L1Resusr_OSt = L1Resusr_OSt - KoefOnOffRes: L1Resusr_OSt = L1Resusr_OSt;
-              //(L2Resusr_OSt > 0) ? L2Resusr_OSt = L2Resusr_OSt - KoefOnOffRes: L2Resusr_OSt = L2Resusr_OSt;
+              //for (size_t i = 0; i < COUNTLAMP; i++)
+             // {
+                  (LampNumber[0].LampResusr_OSt > 0) ? LampNumber[0].LampResusr_OSt = LampNumber[0].LampResusr_OSt - KoefOnOffRes: LampNumber[0].LampResusr_OSt = LampNumber[0].LampResusr_OSt;
+             // }
               OnOffRes = true;  
             }
             else 
@@ -341,15 +336,11 @@ void ResursT (int ResursTime)                   // Ресурсное время
                 TikTimeR = TikTime (TimeOldR, Sec);
                 
                 if (TikTimeR)
-                    {
-                        
-                        for (size_t i = 0; i < COUNTLAMP; i++)
-                        {
-                            (LampNumber[i].LampResusr_OSt > 0) ? LampNumber[i].LampResusr_OSt--: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
-                        }
-                        
-                        // (L1Resusr_OSt > 0) ? L1Resusr_OSt--: L1Resusr_OSt = L1Resusr_OSt;       //Уменьшение ресурса по времени для лампы 1
-                        // (L2Resusr_OSt > 0) ? L2Resusr_OSt--: L2Resusr_OSt = L2Resusr_OSt;       //Уменьшение ресурса по времени для лампы 2
+                    {                        
+                        //for (size_t i = 0; i < COUNTLAMP; i++)
+                        //{
+                            (LampNumber[0].LampResusr_OSt > 0) ? LampNumber[0].LampResusr_OSt--: LampNumber[0].LampResusr_OSt = LampNumber[0].LampResusr_OSt;
+                        //}
                     }
                 TimeOldR = Sec;
                  }
