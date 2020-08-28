@@ -31,6 +31,8 @@ bool b2 = 0;
 int c[5];
 bool x = 1;
 
+int rotateTest;
+int g = 0;
 
 
 
@@ -77,7 +79,7 @@ void LampInit()
 }
 
 //---переменые энкодера для использования в программе----
-uint16_t    rotate;                             //количество проворотов энкодера    
+int         rotate;                             //количество проворотов энкодера    
 bool        button;                             //нажатие на кнопку (импульс)   
 int         countB;                             //количество нажатий на кнопку           
 bool        ChangeRotate;                       //фиксирование поворота энкодера
@@ -250,7 +252,7 @@ void drebezg_encoder (int dredezg)
 {
     wait_ms(dredezg); 
                                                     //использование задержки для исключения дребезга      
-    uint16_t    rotateNew=wheel.getPulses();                          //Чтенеие поворотов энкодера. библиотека OEI  
+    int    rotateNew=wheel.getPulses();                          //Чтенеие поворотов энкодера. библиотека OEI  
     bool        buttonRPG=wheelRPG.pb();                              //Чтение "кнопочного" сигнала энкодера. библиотека RPG  
         ChangeRotate = (rotate!=rotateNew) ? true : false;            //Чтение поворота энкодера без проскальзывания
         if (rotate!=rotateNew or button)                              //Условие включения подсветки дисплея  
@@ -285,8 +287,22 @@ void drebezg_encoder (int dredezg)
                 
             }          
 
+
+        //Ограничение задаваемых значений
+        if (rotate > 9999)
+        {            
+            wheel.reset();
+            wheel.setPulses(0);                //??????????????????????????????????????    
+        }
+        if (rotate < 0)
+        {            
+            wheel.reset();
+            wheel.setPulses(9999);                  //??????????????????????????????????????    
+        }
+            
         rotate=rotateNew;                                             //Поворот энкодера. Значение переменной, которое будет использоваться в программе 
         
+             
         if (buttonRPG)                                                 //Условие чтения импульсного значения для переменной button, которая будет использоваться в программе
         {
             button = true;                                              
@@ -507,16 +523,14 @@ void Level0(int Level0Tout)                     //Начальный экран 
                     lcd.printf(" ");
                 } 
             }*/
-            {
-              
-
+            {          
                 lcd.printf("SP_Res:\n");
                 lcd.locate(10, 0);                          
-                lcd.printf("%i\n", SetPointGeneralResurs);
+                lcd.printf("%ih\n", SetPointGeneralResurs);
 
                 lcd.printf("W_Res:\n");                
                 lcd.locate(10, 1);                          
-                lcd.printf("%i\n", LampNumber[0].LampResusr_OSt);
+                lcd.printf("%ih\n", LampNumber[0].LampResusr_OSt);
             }
     }
 
