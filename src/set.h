@@ -30,6 +30,12 @@ bool b2 = 0;
 
 bool x = 1;
 
+bool DI_Micro[23];
+
+
+
+
+
 
 
 
@@ -74,7 +80,10 @@ void LampInit()
         for (size_t i = 0; i < COUNTLAMP; i++)
         {
             LampNumber[i].LampInit(1,0);
-        }        
+        } 
+        DI_Micro[0] = 1;
+        DI_Micro[2] = 1;
+        DI_Micro[4] = 1;       
 }
 
 //---переменые энкодера для использования в программе----
@@ -273,10 +282,10 @@ void drebezg_encoder (int dredezg)
                         {
                             DispLightTime--;
                         } 
-                            else
+                            else if (Level != 0)
                             {
                                LightDisp = false;
-                              // lcd.cls();
+                               lcd.cls();
                                Level=0;
                                countB = 0;
                                wheel.reset();
@@ -316,19 +325,21 @@ void drebezg_encoder (int dredezg)
         }       
 
 }
+
 //------------------------------------------------------------------------
 
 void ResursT (int ResursTime)                   // Ресурсное время работы установки в целом и каждой лампы в отдельности   
 {
    printf("OnOff %i\n", OnOffint);
    if (OnOff)                                                                          //Когда установка включается, от ресурса отнимается время от включения, а затем уже идет                                                                                                
-   {                                                                                   //стандартный ресурс (почасовой)
+   {    
+       //DI_Micro[0] = 1;                                                                               //стандартный ресурс (почасовой)
         if (!OnOffRes)                                                                 //импульс включения и вычета коэффициента от ресурса                 
             {
-              //for (size_t i = 0; i < COUNTLAMP; i++)
-             // {
-                  (LampNumber[0].LampResusr_OSt > 0) ? LampNumber[0].LampResusr_OSt = LampNumber[0].LampResusr_OSt - KoefOnOffRes: LampNumber[0].LampResusr_OSt = LampNumber[0].LampResusr_OSt;
-             // }
+              for (size_t i = 0; i < COUNTLAMP; i++)
+              {
+                  (LampNumber[i].LampResusr_OSt > 0 && DI_Micro[i] == 1) ? LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt - KoefOnOffRes: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
+              }
               OnOffRes = true;  
             }
             else 
@@ -337,10 +348,10 @@ void ResursT (int ResursTime)                   // Ресурсное время
                 
                 if (TikTimeR)
                     {                        
-                        //for (size_t i = 0; i < COUNTLAMP; i++)
-                        //{
-                            (LampNumber[0].LampResusr_OSt > 0) ? LampNumber[0].LampResusr_OSt--: LampNumber[0].LampResusr_OSt = LampNumber[0].LampResusr_OSt;
-                        //}
+                        for (size_t i = 0; i < COUNTLAMP; i++)
+                        {
+                            (LampNumber[i].LampResusr_OSt > 0 && DI_Micro[i] == 1) ? LampNumber[i].LampResusr_OSt--: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
+                        }
                     }
                 TimeOldR = Sec;
                  }
@@ -489,6 +500,7 @@ void LevelOptions(){                         //уровень с настрой�
             b1 = 0;
             a2 = 0;
             b2 = 0;
+            lcd.cls();
                    
         }
     } 
@@ -519,9 +531,10 @@ void Level0(int Level0Tout)                     //Начальный экран 
                 lcd.locate(10, 0);                          
                 lcd.printf("%ih\n", SetPointGeneralResurs);
 
-                lcd.printf("W_Res:\n");                
-                lcd.locate(10, 1);                          
-                lcd.printf("%ih\n", LampNumber[0].LampResusr_OSt);
+                lcd.printf("================\n");
+                //lcd.printf("W_Res:\n");                
+                //lcd.locate(10, 1);                          
+                //lcd.printf("%ih\n", LampNumber[0].LampResusr_OSt);
             }
     }
 
