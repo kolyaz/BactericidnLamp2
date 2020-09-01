@@ -23,17 +23,12 @@ bool ButtonClick;
 Alarm alarm1;
 bool alarm11;
 
-bool a1 = 0;
+bool a1 = 0;       //доп. переменные
 bool b1 = 0;
 bool a2 = 0;
 bool b2 = 0;
 
-bool x = 1;
-
-bool DI_Micro[23];
-
-
-
+bool x = 1;     //переменная для постоянного счета времени
 
 
 
@@ -48,6 +43,33 @@ I2C i2c_lcd( I2C_SDA,I2C_SCL); // I2C_SDA, I2C_SCL
 TextLCD_I2C lcd(&i2c_lcd, 0x4E, TextLCD_I2C::LCD16x2,TextLCD::HD44780);
 
 const int COUNTLAMP=23; // Колличество ламп 24 в установке (23 т.к. массив начинается с 0)
+
+PinName y[COUNTLAMP] = {
+    PB_0, 
+    PB_1, 
+    PB_2, 
+    PB_3, 
+    PB_4, 
+    PB_5, 
+    PB_6, 
+    PB_7, 
+    PB_8, 
+    PB_9, 
+    PB_10, 
+    PB_11, 
+    PB_12, 
+    PB_13, 
+    PB_14, 
+    PB_15, 
+    PD_0, 
+    PD_1, 
+    PD_2, 
+    PD_3,
+    PD_4,
+    PD_5,
+    PD_6   
+    
+    };
 
 Lamp LampNumber[COUNTLAMP]={ //иницианализация ламп
     LED1,//PC_0,
@@ -75,15 +97,16 @@ Lamp LampNumber[COUNTLAMP]={ //иницианализация ламп
     PA_8,
 };  // Массив класса ламп (23 т.к. массив начинается с 0)
 
+
 void LampInit()
 {
         for (size_t i = 0; i < COUNTLAMP; i++)
         {
             LampNumber[i].LampInit(1,0);
-        } 
-        DI_Micro[0] = 1;
-        DI_Micro[2] = 1;
-        DI_Micro[4] = 1;       
+        }       
+        
+
+               
 }
 
 //---переменые энкодера для использования в программе----
@@ -217,7 +240,7 @@ void TimerObsh (int TimerSec,Timer &t)
                         }
                 }   
             SecSystemOld = SecSystem; 
-        }        
+        }       
 }
 //--------------------------------------------------------------------
 
@@ -338,7 +361,7 @@ void ResursT (int ResursTime)                   // Ресурсное время
             {
               for (size_t i = 0; i < COUNTLAMP; i++)
               {
-                  (LampNumber[i].LampResusr_OSt > 0 && DI_Micro[i] == 1) ? LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt - KoefOnOffRes: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
+                  (LampNumber[i].LampResusr_OSt > 0 && !DigitalIn(y[i])) ? LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt - KoefOnOffRes: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
               }
               OnOffRes = true;  
             }
@@ -350,7 +373,7 @@ void ResursT (int ResursTime)                   // Ресурсное время
                     {                        
                         for (size_t i = 0; i < COUNTLAMP; i++)
                         {
-                            (LampNumber[i].LampResusr_OSt > 0 && DI_Micro[i] == 1) ? LampNumber[i].LampResusr_OSt--: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
+                            (LampNumber[i].LampResusr_OSt > 0 && !DigitalIn(y[i])) ? LampNumber[i].LampResusr_OSt--: LampNumber[i].LampResusr_OSt = LampNumber[i].LampResusr_OSt;
                         }
                     }
                 TimeOldR = Sec;
